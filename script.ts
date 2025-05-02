@@ -2,7 +2,7 @@
 const todoInput = document.getElementById('todo-input') as HTMLInputElement;
 const todoForm = document.getElementById('todo-form') as HTMLFormElement;
 const todoList = document.getElementById('todo-list') as HTMLUListElement;
-const doneList = document.getElementById('done-list') as HTMLUListElement;
+const doneList = document.getElementById('done-list') as HTMLUListElement; //dsadsadas
 
 // 할 일 및 완료된 작업을 저장할 배열
 type Task = {
