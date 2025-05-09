@@ -6,8 +6,6 @@ import { useAuth } from "../week5/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
-    const navigate = useNavigate()
-    const {logout} = useAuth()
     const [data, setData] = useState<ResponseMyInfoDto | null>(null)
     useEffect(()=> {
         const getData = async () => {
@@ -20,17 +18,9 @@ const MyPage = () => {
         getData()
     },[])
 
-    const handleLogout = async () => {
-        await logout
-        navigate("/")
-    }
 
     return (
-        <div>{data?.data?.name}
-        <button className="cursor-pointer bg-blue-300 rounded-sm hover:scale-90"
-        onClick={handleLogout}>
-            로그아웃
-        </button>
+        <div>{data?.data?.name}병신
          </div>
     )
 
