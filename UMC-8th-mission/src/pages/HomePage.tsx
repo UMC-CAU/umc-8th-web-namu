@@ -8,7 +8,7 @@ import LpCardSkeletonList from "../components/LpCard/LpCardSkeletonList"
 
 const HomePage = () => {
     const [search,setSearch] = useState("")
-    const {data,isFetching,isError,isPending,hasNextPage,fetchNextPage} = useGetInfiniteLpList({ limit:10, search, order: PaginationOrder.desc })
+    const {data,isFetching,isError,isPending,hasNextPage,fetchNextPage} = useGetInfiniteLpList({ limit:10, search, order: PaginationOrder.asc })
     //const {data,isLoading,isPending,isError}= useGetLpList({search,limit:50})
     const lps = data
 

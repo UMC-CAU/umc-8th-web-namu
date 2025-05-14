@@ -20,7 +20,7 @@ const MyPage = () => {
 
 
     return (
-        <div>{data?.data?.name}병신
+        <div className="mt-12">{data?.data?.name}바보
          </div>
     )
 

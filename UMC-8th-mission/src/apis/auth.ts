@@ -28,3 +28,4 @@ export const postLogout = async ()=> {
 
     return data
 }
+
