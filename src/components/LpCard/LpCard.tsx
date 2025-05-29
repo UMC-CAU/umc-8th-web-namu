@@ -1,5 +1,6 @@
 import { Lp } from "../../types/lp"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../week5/context/AuthContext"
 
 interface LpCardProps{
     lp:Lp
@@ -7,6 +8,7 @@ interface LpCardProps{
 
 const LpCard = ({lp}:LpCardProps) => {
     const navigate = useNavigate()
+    
     return (
         <div onClick={()=>navigate(`/lps/${lp.id}`)} className="relative rounded-lg cursor-pointer overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <img src={lp.thumbnail} alt={lp.title} className="w-full h-48 object-cover" />

@@ -5,13 +5,14 @@ import { PaginationOrder } from "../types/common"
 import { useInView } from "react-intersection-observer"
 import LpCard from "../components/LpCard/LpCard"
 import LpCardSkeletonList from "../components/LpCard/LpCardSkeletonList"
+import useDebounce from "../hooks/useDebounce"
+import { SEARCH_DELAY } from "../constants/delay"
 
 const HomePage = () => {
     const [search,setSearch] = useState("")
-    const {data,isFetching,isError,isPending,hasNextPage,fetchNextPage} = useGetInfiniteLpList({ limit:10, search, order: PaginationOrder.asc })
+    const debouncedValue = useDebounce(search,SEARCH_DELAY)
+    const {data:lps,isFetching,isError,isPending,hasNextPage,fetchNextPage} = useGetInfiniteLpList({ limit:10, search: debouncedValue, order: PaginationOrder.asc })
     //const {data,isLoading,isPending,isError}= useGetLpList({search,limit:50})
-    const lps = data
-
     const{ref,inView} = useInView()
 
     useEffect(()=>{
@@ -22,8 +23,10 @@ const HomePage = () => {
 
     return (
         <div className="mt-20">
-            <input value={search} onChange={(e)=>setSearch(e.target.value)} className=""/>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <input value={search} onChange={(e)=>setSearch(e.target.value)} 
+            className={"border p-4 rounded-sm "} 
+            placeholder="검색어를 입력하시오."/>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
             {isPending && <LpCardSkeletonList count={20}/>}         
             {lps?.pages?.map((page)=>page.data.data)
             ?.flat()

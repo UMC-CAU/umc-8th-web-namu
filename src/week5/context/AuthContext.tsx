@@ -9,6 +9,7 @@ interface AuthContextType {
     refreshToken: string|null
     login:(signinData:RequestSigninDto)=>Promise<void>
     logout:()=>Promise<void>
+
 }
 
 export const AuthContext = createContext<AuthContextType>({

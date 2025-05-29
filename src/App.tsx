@@ -12,20 +12,29 @@ import GoogleLoginRedirectPage from './pages/GoogleLoginRedirectPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import LpDetailPage from './pages/LpDetailPage'
+import ThrottlePage from './pages/ThrottlePage'
+import HomeLayoutWithoutFooter from './layouts/HomeLayoutWithoutFooter'
 
 export const queryclient = new QueryClient()
 
 const publicRoutes:RouteObject[] = [
+    {
+    path: "/",
+    element:<HomeLayoutWithoutFooter/>,
+  errorElement: <NotFoundPage/>,
+  children: [ 
+    {index: true, element: <HomePage/>},
+  ]
+  },
   {
     path: "/",
     element:<HomeLayout/>,
   errorElement: <NotFoundPage/>,
-  children: [
-    {index: true, element: <HomePage/>},
+  children: [ 
     {path:'login', element: <LoginPage/>},
     {path:'signup', element: <SignupPage/>},
     {path:"v1/auth/google/callback", element: <GoogleLoginRedirectPage/>},
-    {path:"lps/:id", element: <LpDetailPage/>}
+    {path:"throttle", element: <ThrottlePage/>},
   ]
   }
 ]
@@ -39,7 +48,8 @@ const protectedRoutes:RouteObject[] = [
       {
         path: "my",
         element: <MyPage/>,
-      }
+      },
+      {path:"lps/:id", element: <LpDetailPage/>},
     ]
   }
 ]

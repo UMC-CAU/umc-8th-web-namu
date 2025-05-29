@@ -8,7 +8,7 @@ const HomeLayout = () => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(v => !v)
     return (
-        <div className="bg-sky-100">
+        <div className="bg-gray-100">
             <Navbar onClose={toggle}/>
             <div className="h-dvh flex flex-col ">
             {isOpen && <Sidebar/>}

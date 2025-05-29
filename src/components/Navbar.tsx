@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../week5/context/AuthContext";
+import useGetMyInfo from "../hooks/queries/useGetMyInfo";
 
 export const Navbar = ({onClose}:{onClose: ()=> void }) => {
   const { accessToken, logout } = useAuth();
   const navigate = useNavigate();
+  const{data} = useGetMyInfo(accessToken)
 
   const handleLogout = async () => {
     await logout();    // 함수 호출로 바꿔야 합니다
@@ -26,7 +28,7 @@ export const Navbar = ({onClose}:{onClose: ()=> void }) => {
         // 로그인 상태일 때: 마이페이지 & 로그아웃
         <div className="flex items-center space-x-4">
           <Link to="/my" className="text-blue-500">
-            마이페이지
+            {data?.data.name}님 반갑습니다.
           </Link>
           <button
             onClick={handleLogout}

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetLpDetail from "../hooks/queries/useGetLpDetail";// Adjust the path as necessary
 import useGetMyInfo from "../hooks/queries/useGetMyInfo";
 import { useAuth } from "../week5/context/AuthContext";
@@ -13,9 +13,9 @@ const LpDetailPage = () => {
   const{data:me} = useGetMyInfo(accessToken)
   const{mutate:likeMutate}=usePostLike()
   const{mutate:disLikeMutate}=useDeleteLike()
+  const navigate = useNavigate()
 
   const isLiked =lp?.data.likes.map((like)=> like.userId).includes(me?.data.id as number)
-
 
   const handleLikeLp = () => {
     me?.data.id && likeMutate({ lpId:Number(lpId.id)});
@@ -25,6 +25,10 @@ const LpDetailPage = () => {
     me?.data.id && disLikeMutate({ lpId:Number(lpId.id)});
   }
 
+    if(!accessToken){
+        alert("로그인이 필요한 서비스입니다 로그인을 해주세요.")
+        navigate("/")
+    }
 
     if(isPending){
         return(
